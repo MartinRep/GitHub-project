@@ -6,8 +6,9 @@ I was fed up with repeating the same steps every time I wanted to work on a proj
 # What it does?
 
  - Creates a new folder in a specified Project folder. I have a `Projects` folder in my Home folder, where I keep all my coding projects. Being tidy and all.  
- - Checks your GitHub repositories, and if the project already exists, it will be cloned.
- - If the repository doesn't exist, it will be created.
+ - Checks your GitHub repositories.
+ - If the project already exists, it will be Cloned or Pulled.
+ - If the repository doesn't exist, it will be created and Cloned.
  - Visual Studio Code will start in the new Project folder.
  - Code away. :relaxed:
  
