@@ -35,6 +35,6 @@ python github.py "project name"
 Or with the bash file provided  
 `github new-project`
 
-Command `github` on it's own creates an new project with current timestamp. ie. `project-1560467353`
+Command `github` on it's own creates a new project with current timestamp. ie. `project-1560467353`
 
 
