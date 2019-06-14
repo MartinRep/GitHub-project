@@ -34,12 +34,10 @@ def github_repo(project_name):
             if os.path.isdir(project_path + "/.git"):
                 print("Repository folder already exist, Repository Pull initialized..")
                 git.Repo(project_name).remotes.origin.pull()
-                origin = git.Repo(project_name).remotes.origin
-                # Modify repository remote URL from https to ssh. This allows to use git push with RSA key (no need for password)
-                origin.config_writer.set("pushurl", "git@github.com:{}".format(repo.git_url[16:]))
-                return
-            git.Repo.clone_from(repo.html_url, project_path)
+            else :
+                git.Repo.clone_from(repo.html_url, project_path)
             # Modify repository remote URL from https to ssh. This allows to use git push with RSA key (no need for password)
+            origin = git.Repo(project_name).remotes.origin
             origin.config_writer.set("pushurl", "git@github.com:{}".format(repo.git_url[16:]))
             return
     print("Repository not found, creating a new one.")
