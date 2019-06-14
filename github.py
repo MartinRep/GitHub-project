@@ -41,8 +41,13 @@ def github_repo(project_name):
             origin.config_writer.set("pushurl", "git@github.com:{}".format(repo.git_url[16:]))
             return
     print("Repository not found, creating a new one.")
+    # Creates Repository on Github
     repo = user.create_repo(project_name)
+    # Clone the repository into local folder
     git.Repo.clone_from(repo.html_url, project_path)
+    # Modify repository remote URL from https to ssh. This allows to use git push with RSA key (no need for password)
+    origin = git.Repo(project_name).remotes.origin
+    origin.config_writer.set("pushurl", "git@github.com:{}".format(repo.git_url[16:]))
 
 def github_getall():
     myGH = Github(GH_tokken) 
@@ -67,7 +72,25 @@ def main():
         print("Listing all your repositories...")
         github_getall()
         return
-    elif sys.argv[1].startswith("-") or sys.argv[1].startswith("--"):
+    elif "-P" in sys.argv[1] or "--push" in sys.argv[1]:
+        message = ""
+        for word in sys.argv[2:]:
+            message = message + word + " "
+        message = message[:-1]
+        print(message)
+        cur_dir = os.getcwd()
+        if os.path.isdir(cur_dir + "/.git"):
+            subprocess.run(["git", "add", cur_dir, "-A"])
+            subprocess.run(["git", "commit", "-m", message])
+            answer = input("Push Commit with message: \"{}\" ?[y/n]".format(message))
+            if "y" in answer:
+                subprocess.run(["git", "push"])
+            else:
+                subprocess.run(["git", "reset", "--soft", "HEAD^"])
+        else:
+            print("{} is not an Git folder".format(cur_dir))
+        return
+    elif sys.argv[1].startswith("-"):
         print("Unknown command: {}\n".format(sys.argv[1]))
         printout_help()
         return

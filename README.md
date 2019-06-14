@@ -2,6 +2,7 @@
 
 Small python script for starting a Project on Github.  
 I was fed up with repeating the same steps every time I wanted to work on a project, so I wrote this script.
+It's a terminal abstraction for GitHub.
 
 # What it does?
 
@@ -11,6 +12,7 @@ I was fed up with repeating the same steps every time I wanted to work on a proj
  - If the repository doesn't exist, it will be created on GitHub and Cloned.
  - Visual Studio Code will start in the new Project folder.
  - Code away. :relaxed:
+ - Also it makes commits easier.
  
  # Installation
  
@@ -33,14 +35,18 @@ I was fed up with repeating the same steps every time I wanted to work on a proj
 
 # Usage
 
+python github.py "project name"  
+`python github.py my-newproject`    
+Or with the bash file provided  
+`github new-project`  
+Command `github` on it's own creates a new project with current timestamp. ie. `project-1560467353`  
+
 `python github.py --all` or `-A` will list all your GitHub repositories.  
+
 `python github.py --help` or `-H` will display very 'detailed help'.  
 
-python github.py "project name"  
-`python github.py my-newproject`  
-Or with the bash file provided  
-`github new-project`
+`python github.py -push` or `-P` followed by message will add all new file in the git folder to commit, attach message and push to GitHub.  
+`github -P This is my new commit message, no need for quotation marks as well.`
 
-Command `github` on it's own creates a new project with current timestamp. ie. `project-1560467353`
 
 
