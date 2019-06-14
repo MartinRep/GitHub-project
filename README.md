@@ -24,7 +24,7 @@ I was fed up with repeating the same steps every time I wanted to work on a proj
  
   - The script will install `github` script to your local bin folder so you can run it from anywhere  
   `./install.sh <GiTHub Access Token>`
-  - Or if you don't provide Token in argiment it will prompt you for it.
+  - Or if you don't provide Token in argument it will prompt you for it.
   - You will be asked for a sudo password to access the `/usr/local/bin` folder.
   
   ## Troubleshoot. 
