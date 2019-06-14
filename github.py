@@ -22,31 +22,48 @@ def create_dir():
         os.makedirs(project_path)
         print("Folder {} created.".format(project_path))
  
-def init_github_repo(project_name):
+def github_repo(project_name):
+    os.chdir(projects_dir)
     myGH = Github(GH_tokken) 
     user = myGH.get_user()
     print("Checking if project repository alredy exists...")
     for repo in user.get_repos():
+        # Local project files found
         if project_name == repo.name:
             print("Repository {} alredy exist on Github. Just cloning the repo...".format(project_name))
             if os.path.isdir(project_path + "/.git"):
                 print("Repository folder already exist, Repository Pull initialized..")
-                os.chdir(projects_dir)
                 git.Repo(project_name).remotes.origin.pull()
+                origin = git.Repo(project_name).remotes.origin
+                # Modify repository remote URL from https to ssh. This allows to use git push with RSA key (no need for password)
+                origin.config_writer.set("pushurl", "git@github.com:{}".format(repo.git_url[16:]))
                 return
-            git.Repo.clone_from(repo.html_url, project_path)            
+            git.Repo.clone_from(repo.html_url, project_path)
+            # Modify repository remote URL from https to ssh. This allows to use git push with RSA key (no need for password)
+            origin.config_writer.set("pushurl", "git@github.com:{}".format(repo.git_url[16:]))
             return
     print("Repository not found, creating a new one.")
     repo = user.create_repo(project_name)
     git.Repo.clone_from(repo.html_url, project_path)
 
+def github_getall():
+    myGH = Github(GH_tokken) 
+    user = myGH.get_user()
+    for repo in user.get_repos():
+        print(repo.name)
+
 def main():
     global project_path
-    #Prints out small help info
-    if sys.argv[1] == "--help" or sys.argv[1] == "-H":
+    # Prints out small help info
+    if "--help" in sys.argv or "-H" in sys.argv:
         print("Github repository tool.\n Create or Clone GitHub project and start editor.\n github <project name>")
         return
-    if len(sys.argv) is 1:
+    # Prints out all yours GitHub repositories
+    elif "-all" in sys.argv or "-A" in sys.argv:
+        github_getall()
+        return
+    # Create a new project with Generated name
+    elif len(sys.argv) is 1:
         project_name = "project-" + str(int(time.time()))
     else:
         project_name = sys.argv[1]
@@ -54,7 +71,7 @@ def main():
     # Creates Project folder
     create_dir()
     # Deals with github repos
-    init_github_repo(project_name)
+    github_repo(project_name)
     # Runs Visual Studio Code in the new Project folder
     print("Starting editor...")
     subprocess.run([editor, project_path])

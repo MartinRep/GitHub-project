@@ -33,6 +33,6 @@ done < "$input"
 
 chmod +x $FILE
 echo 'Copying script to local bin folder...'
-sudo cp $FILE $FOLDER
+sudo mv $FILE $FOLDER
 sudo chmod +x "$FOLDER/$FILE"
 echo "The script file $FILE created in $FOLDER"
