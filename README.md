@@ -1,8 +1,8 @@
 # GitHub-project
 
-Small python script for starting a Project on Github.  
-I was fed up with repeating the same steps every time I wanted to work on a project, so I wrote this script.
-It's a terminal abstraction for GitHub.
+A small Python based tool for working with projects on Github.  
+I was fed up with repeating the same steps every time I wanted to work on a project, so I wrote this script.  
+It's a terminal abstraction for GitHub.  
 
 # What it does?
 
@@ -22,7 +22,7 @@ It's a terminal abstraction for GitHub.
  - Or simply use `pip install -r requirements.txt`
  - Copy the token and paste it into the `github.py`. Variables for customization purposes are on the top of the file.  
  
- ## Linux based systems. (Optional, but Recommended)
+ ## Linux based systems (Optional, but Recommended)
  
   - The script will install `github` script to your local bin folder so you can run it from anywhere  
   `./install.sh <GiTHub Access Token>`
@@ -30,7 +30,7 @@ It's a terminal abstraction for GitHub.
   - You will be asked for a sudo password to access the `/usr/local/bin` folder.
   - Now simply use `github <command>` from any folder.
   
-  ### Troubleshoot. 
+  ### Troubleshoot 
   - Change file attributes in case it's not marked as executable `chmod +x ./install.sh`
   
 
