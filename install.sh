@@ -21,7 +21,7 @@ fi
 
 touch "$FILE"
 echo "#!/usr/bin/env python" > "$FILE"
-input="github.py"
+input="gh.py"
 while IFS= read -r line
 do
 if [[ "$line" == "GH_tokken = \"Your Github Token\" # Get your own from https://github.com/settings/tokens" ]]; then
