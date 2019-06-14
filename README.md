@@ -45,8 +45,7 @@ Command `github` on it's own creates a new project with current timestamp. ie. `
 
 `python github.py --help` or `-H` will display very 'detailed help'.  
 
-`python github.py -push` or `-P` followed by message will add all new file in the git folder to commit, attach message and push to GitHub.  
-`github -P This is my new commit message, no need for quotation marks as well.`
+`python github.py -push` or `-P` followed by message will add all new file in the git folder to commit, attach message and push to GitHub. `github -P This is my new commit message, no need for quotation marks.`
 
 
 

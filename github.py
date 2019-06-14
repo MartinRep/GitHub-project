@@ -61,7 +61,7 @@ def printout_help():
     print("--all or -A to list all your GitHub repositories")
     print("--push or -P <Commit message> This will create a new commit with message and push it to GitHub.")
     print("     Works with git repository of CURRENT WORKING FOLDER!")
-    print("Example: github -P This is my commit message. No quotations needed.")
+    print("     Example: github -P This is my commit message. No quotations needed.")
 
 
 def main():
