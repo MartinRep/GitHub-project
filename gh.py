@@ -82,13 +82,13 @@ def main():
         message = message[:-1]
         cur_dir = os.getcwd()
         if os.path.isdir(cur_dir + "/.git"):
-            subprocess.run(["git", "add", cur_dir, "-A"])
-            subprocess.run(["git", "commit", "-m", message])
+            subprocess.run(["git", "add", cur_dir, "-A"], shell = True)
+            subprocess.run(["git", "commit", "-m", message], shell = True)
             answer = input("Push Commit with message: \"{}\" ?[y/n]".format(message))
             if "y" in answer:
-                subprocess.run(["git", "push"])
+                subprocess.run(["git", "push"], shell = True)
             else:
-                subprocess.run(["git", "reset", "--soft", "HEAD^"])
+                subprocess.run(["git", "reset", "--soft", "HEAD^"], shell = True)
         else:
             print("{} is not an Git folder".format(cur_dir))
         return
@@ -109,7 +109,7 @@ def main():
     github_repo(project_name)
     # Runs Visual Studio Code in the new Project folder
     print("Starting editor...")
-    subprocess.run([editor, project_path])
+    subprocess.run([editor, project_path], shell = True)
 
 
 if __name__ == "__main__":
