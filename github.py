@@ -52,19 +52,31 @@ def github_getall():
     for repo in user.get_repos():
         print(repo.name)
 
+def printout_help():
+    print("Github repository tool.\n Creates or Clones GitHub project and start editor.\n github <project name>")
+    print("--help or -H for this very usefull help")
+    print("--all or -A to list all your GitHub repositories")
+
+
 def main():
     global project_path
     # Prints out small help info
     if "--help" in sys.argv or "-H" in sys.argv:
-        print("Github repository tool.\n Create or Clone GitHub project and start editor.\n github <project name>")
+        printout_help()
         return
     # Prints out all yours GitHub repositories
     elif "-all" in sys.argv or "-A" in sys.argv:
+        print("Listing all your repositories...")
         github_getall()
+        return
+    elif sys.argv[1].startswith("-") or sys.argv[1].startswith("--"):
+        print("Unknown command: {}\n".format(sys.argv[1]))
+        printout_help()
         return
     # Create a new project with Generated name
     elif len(sys.argv) is 1:
         project_name = "project-" + str(int(time.time()))
+        print("Generating a new Project with name: {}".format(project_name))
     else:
         project_name = sys.argv[1]
     project_path = projects_dir + project_name
