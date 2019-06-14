@@ -5,7 +5,7 @@ from os.path import expanduser
 import subprocess
 
 # GitHub access token
-GH_tokken = "4470ee3a1714f9f010316e70d51ee1a7d37f438b" # Get your own from https://github.com/settings/tokens
+GH_tokken = "Your Github Token" # Get your own from https://github.com/settings/tokens
 
 # Your favourite text editor. Default is Visual Studio code
 editor = "code"
