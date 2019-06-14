@@ -5,7 +5,7 @@ from os.path import expanduser
 import subprocess
 
 # GitHub access token
-GH_tokken = "Your Github Token" # Get your own from https://github.com/settings/tokens
+GH_tokken = "051417227564f1e03000c3dbf58148a1b7d32bbb" # Get your own from https://github.com/settings/tokens
 
 # Your favourite text editor. Default is Visual Studio code
 editor = "code"
@@ -62,3 +62,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
