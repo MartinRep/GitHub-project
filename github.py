@@ -59,6 +59,9 @@ def printout_help():
     print("Github repository tool.\n Creates or Clones GitHub project and start editor.\n github <project name>")
     print("--help or -H for this very usefull help")
     print("--all or -A to list all your GitHub repositories")
+    print("--push or -P <Commit message> This will create a new commit with message and push it to GitHub.")
+    print("     Works with git repository of CURRENT WORKING FOLDER!")
+    print("Example: github -P This is my commit message. No quotations needed.")
 
 
 def main():
@@ -77,7 +80,6 @@ def main():
         for word in sys.argv[2:]:
             message = message + word + " "
         message = message[:-1]
-        print(message)
         cur_dir = os.getcwd()
         if os.path.isdir(cur_dir + "/.git"):
             subprocess.run(["git", "add", cur_dir, "-A"])
