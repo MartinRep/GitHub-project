@@ -17,14 +17,17 @@ I was fed up with repeating the same steps every time I wanted to work on a proj
  - You need Python, of course. I used Python 3.7
  - Two extra packages: `pip install gitpython` , `pip install PyGithub`
  - Visit https://github.com/settings/tokens and generate a new Access Token. You only need access to repositories, nothing else.  
- - Copy the token and paste it into the `github.py` and/or `github` script. Variables are on the top of the file.  
+ - Copy the token and paste it into the `github.py`. Variables for customization purposes are on the top of the file.  
  - Or simply use `pip install -r requirements.txt`
- - Change your preferred Project folder and Code editor in the script. Variables are on the top.
  
  ## Optional for Linux based systems users.
  
-  - Install to your local bin folder so you can run it anywhere `./install.sh`
-  - You will be asked for a password to access the `/usr/local/bin` folder.
+  - The script will install `github` script to your local bin folder so you can run it from anywhere  
+  `./install.sh <GiTHub Access Token>`
+  - Or if you don't provide Token in argiment it will prompt you for it.
+  - You will be asked for a sudo password to access the `/usr/local/bin` folder.
+  
+  ## Troubleshoot. 
   - Change file attributes in case it's not marked as executable `chmod +x ./install.sh`
   
 
