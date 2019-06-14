@@ -16,20 +16,21 @@ It's a terminal abstraction for GitHub.
  
  # Installation
  
+ - Visit https://github.com/settings/tokens and generate a new Access Token. You only need access to repositories, nothing else.  
  - You need Python, of course. I used Python 3.7
  - Two extra packages: `pip install gitpython` , `pip install PyGithub`
- - Visit https://github.com/settings/tokens and generate a new Access Token. You only need access to repositories, nothing else.  
- - Copy the token and paste it into the `github.py`. Variables for customization purposes are on the top of the file.  
  - Or simply use `pip install -r requirements.txt`
+ - Copy the token and paste it into the `github.py`. Variables for customization purposes are on the top of the file.  
  
- ## Optional for Linux based systems users.
+ ## Linux based systems. (Optional, but Recommended)
  
   - The script will install `github` script to your local bin folder so you can run it from anywhere  
   `./install.sh <GiTHub Access Token>`
   - Or if you don't provide Token in argument it will prompt you for it.
   - You will be asked for a sudo password to access the `/usr/local/bin` folder.
+  - Now simply use `github <command>` from any folder.
   
-  ## Troubleshoot. 
+  ### Troubleshoot. 
   - Change file attributes in case it's not marked as executable `chmod +x ./install.sh`
   
 
