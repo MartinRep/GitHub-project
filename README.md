@@ -8,7 +8,7 @@ I was fed up with repeating the same steps every time I wanted to work on a proj
  - Creates a new folder in a specified Project folder. I have a `Projects` folder in my Home folder, where I keep all my coding projects. Being tidy and all.  
  - Checks your GitHub repositories.
  - If the project already exists, it will be Cloned or Pulled.
- - If the repository doesn't exist, it will be created and Cloned.
+ - If the repository doesn't exist, it will be created on GitHub and Cloned.
  - Visual Studio Code will start in the new Project folder.
  - Code away. :relaxed:
  
@@ -32,6 +32,9 @@ I was fed up with repeating the same steps every time I wanted to work on a proj
   
 
 # Usage
+
+`python github.py --all` or `-A` will list all your GitHub repositories.  
+`python github.py --help` or `-H` will display very 'detailed help'.  
 
 python github.py "project name"  
 `python github.py my-newproject`  
