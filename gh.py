@@ -60,8 +60,7 @@ def github_commit():
         # Checking if git is installed.
         proc = subprocess.run(["git", "--version"], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         if not "git version" in str(proc.stdout):
-            print("! Can't find instance of git program !")
-            return
+            raise Exception("git not found")
         message = "\""
         for word in sys.argv[2:]:
             message = message + word + " "
@@ -78,7 +77,7 @@ def github_commit():
         else:
             print("{} is not an Git folder".format(cur_dir))
     except Exception as e:
-        print("! Something went wrong with git !" + str(e))
+        print("! Something went wrong with git ! " + str(e))
 
 def printout_help():
     print("Github repository tool.\n Creates or Clones GitHub project and start editor.\n github <project name>")
@@ -120,7 +119,7 @@ def main():
     github_repo(project_name)
     # Runs Visual Studio Code in the new Project folder
     print("Starting editor...")
-    subprocess.run([editor, project_path])
+    subprocess.run([editor, project_path], shell = True)
 
 
 if __name__ == "__main__":
