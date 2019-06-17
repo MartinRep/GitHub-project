@@ -58,25 +58,23 @@ def github_getall():
 def github_commit():
     try:
         # Checking if git is installed.
-        proc = subprocess.run(["git --version"], shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        proc = subprocess.run(["git", "--version"], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         if not "git version" in str(proc.stdout):
             print("! Can't find instance of git program !")
             return
-        message = ""
+        message = "\""
         for word in sys.argv[2:]:
             message = message + word + " "
-        message = message[:-1]
+        message = message[:-1] + "\""
         cur_dir = os.getcwd()
         if os.path.isdir(cur_dir + "/.git"):
-            command = "git add {} -A".format(cur_dir)
-            subprocess.run([command], shell = True)
-            command = "git commit -m \"{}\"".format(message)
-            subprocess.run([command], shell = True)
-            answer = input("Push Commit with message: \"{}\" ?[y/n]".format(message))
+            subprocess.run(["git", "add", cur_dir, "-A"])
+            subprocess.run(["git", "commit", "-m", message])
+            answer = input("Push Commit with message: {} ?[y/n]".format(message))
             if "y" in answer:
-                subprocess.run(["git push"], shell = True)
+                subprocess.run(["git", "push"])
             else:
-                subprocess.run(["git reset --soft HEAD^"], shell = True)
+                subprocess.run(["git", "reset", "--soft", "HEAD^"])
         else:
             print("{} is not an Git folder".format(cur_dir))
     except Exception as e:
@@ -122,7 +120,7 @@ def main():
     github_repo(project_name)
     # Runs Visual Studio Code in the new Project folder
     print("Starting editor...")
-    subprocess.run([editor, project_path], shell = True)
+    subprocess.run([editor, project_path])
 
 
 if __name__ == "__main__":
