@@ -103,25 +103,7 @@ def main():
         github_getall()
         return
     elif "-P" in sys.argv[1] or "--push" in sys.argv[1]:
-<<<<<<< HEAD:gh.py
         github_commit()
-=======
-        message = ""
-        for word in sys.argv[2:]:
-            message = message + word + " "
-        message = message[:-1]
-        cur_dir = os.getcwd()
-        if os.path.isdir(cur_dir + "/.git"):
-            subprocess.run(["git", "add", cur_dir, "-A"], shell = True)
-            subprocess.run(["git", "commit", "-m", message], shell = True)
-            answer = input("Push Commit with message: \"{}\" ?[y/n]".format(message))
-            if "y" in answer:
-                subprocess.run(["git", "push"], shell = True)
-            else:
-                subprocess.run(["git", "reset", "--soft", "HEAD^"], shell = True)
-        else:
-            print("{} is not an Git folder".format(cur_dir))
->>>>>>> 505c2773a51bc8df22917bd7a3773da171f82dd3:github.py
         return
     elif sys.argv[1].startswith("-"):
         print("Unknown command: {}\n".format(sys.argv[1]))
