@@ -99,17 +99,18 @@ def main():
         print("Listing all your repositories...")
         github_getall()
         return
-    elif "-P" in sys.argv[1] or "--push" in sys.argv[1]:
+    elif "-P" in sys.argv or "--push" in sys.argv:
         github_commit()
         return
-    elif sys.argv[1].startswith("-"):
+    elif len(sys.argv) > 1 and sys.argv[1].startswith("-"):
         print("Unknown command: {}\n".format(sys.argv[1]))
         printout_help()
         return
     # Create a new project with Generated name
-    elif len(sys.argv) is 1:
-        project_name = "project-" + str(int(time.time()))
-        print("Generating a new Project with name: {}".format(project_name))
+    elif os.path.isdir(os.getcwd() + "/.git"):
+        print("Pull initialized..")
+        git.Repo(os.getcwd()).remotes.origin.pull()
+        return
     else:
         project_name = sys.argv[1]
     project_path = projects_dir + project_name

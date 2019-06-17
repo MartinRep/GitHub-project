@@ -28,7 +28,7 @@ It's a terminal abstraction for GitHub.
   `./install.sh <GiTHub Access Token>`
   - Or if you don't provide Token in argument it will prompt you for it.
   - You will be asked for a sudo password to access the `/usr/local/bin` folder.
-  - Now simply use `github <command>` from any folder.
+  - Now simply use `github <command>` from any folder instead `python gh.py <command>`.
   
   ### Troubleshoot 
   - Change file attributes in case it's not marked as executable `chmod +x ./install.sh`
@@ -38,15 +38,11 @@ It's a terminal abstraction for GitHub.
 
 python gh.py "project name"  
 `python gh.py my-newproject`    
-Or with the bash file provided  
-`github new-project`  
-Command `github` on it's own creates a new project with current timestamp. ie. `project-1560467353`  
 
 `python gh.py --all` or `-A` will list all your GitHub repositories.  
 
 `python gh.py --help` or `-H` will display very 'detailed help'.  
 
-`python gh.py -push` or `-P` followed by message will add all new file in the git folder to commit, attach message and push to GitHub. `github -P This is my new commit message, no need for quotation marks.`
+`python gh.py -push` or `-P` followed by message will add all new file in the git folder to commit, attach message and push to GitHub. `github -P Commit message, no need for quotation marks.`  
 
-
-
+`python gh.py` on it's own will do `git pull` for the Project in the current working directory.  
