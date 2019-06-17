@@ -55,6 +55,33 @@ def github_getall():
     for repo in user.get_repos():
         print(repo.name)
 
+def github_commit():
+    try:
+        # Checking if git is installed.
+        proc = subprocess.run(["git --version"], shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        if not "git version" in str(proc.stdout):
+            print("! Can't find instance of git program !")
+            return
+        message = ""
+        for word in sys.argv[2:]:
+            message = message + word + " "
+        message = message[:-1]
+        cur_dir = os.getcwd()
+        if os.path.isdir(cur_dir + "/.git"):
+            command = "git add {} -A".format(cur_dir)
+            subprocess.run([command], shell = True)
+            command = "git commit -m \"{}\"".format(message)
+            subprocess.run([command], shell = True)
+            answer = input("Push Commit with message: \"{}\" ?[y/n]".format(message))
+            if "y" in answer:
+                subprocess.run(["git push"], shell = True)
+            else:
+                subprocess.run(["git reset --soft HEAD^"], shell = True)
+        else:
+            print("{} is not an Git folder".format(cur_dir))
+    except Exception as e:
+        print("! Something went wrong with git !" + str(e))
+
 def printout_help():
     print("Github repository tool.\n Creates or Clones GitHub project and start editor.\n github <project name>")
     print("--help or -H for this very usefull help")
@@ -76,6 +103,9 @@ def main():
         github_getall()
         return
     elif "-P" in sys.argv[1] or "--push" in sys.argv[1]:
+<<<<<<< HEAD:gh.py
+        github_commit()
+=======
         message = ""
         for word in sys.argv[2:]:
             message = message + word + " "
@@ -91,6 +121,7 @@ def main():
                 subprocess.run(["git", "reset", "--soft", "HEAD^"], shell = True)
         else:
             print("{} is not an Git folder".format(cur_dir))
+>>>>>>> 505c2773a51bc8df22917bd7a3773da171f82dd3:github.py
         return
     elif sys.argv[1].startswith("-"):
         print("Unknown command: {}\n".format(sys.argv[1]))
