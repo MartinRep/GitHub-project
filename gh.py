@@ -3,6 +3,7 @@ import git
 import sys, time, os
 from os.path import expanduser
 import subprocess
+import platform
 
 # GitHub access token
 GH_tokken = "Your Github Token" # Get your own from https://github.com/settings/tokens
@@ -34,7 +35,7 @@ def github_repo(project_name):
             if os.path.isdir(project_path + "/.git"):
                 print("Repository folder already exist, Repository Pull initialized..")
                 git.Repo(project_name).remotes.origin.pull()
-            else :
+            else:
                 git.Repo.clone_from(repo.html_url, project_path)
             # Modify repository remote URL from https to ssh. This allows to use git push with RSA key (no need for password)
             origin = git.Repo(project_name).remotes.origin
@@ -79,6 +80,26 @@ def github_commit():
     except Exception as e:
         print("! Something went wrong with git ! " + str(e))
 
+def install():
+    if "Linux" in platform.system():
+        script_file = "gh"
+    elif "Windows" in platform.system():
+        script_file = "gh.py"
+    script = open(script_file, w)
+    if "Linux" in platform.system():
+        script.write("#!/usr/bin/env python\n\n")
+    with open(gh_file) as f:
+        line = f.readline()
+        if "GH_tokken = \"Your Github Token\"" in line:
+            line = "GH_tokken = \"{}\"".format(GH_tokken)
+        elif "editor = \"code\"" in line and editor in not "":
+            line = "editor = \"{}\"".format(editor)
+        script.write(line)
+    script.close()
+
+    # gh=python C:\Users\Martin\Projects\GitHub-project\gh.py $*
+    # subprocess.run("reg add \"HKCU\Software\Microsoft\Command Processor\" /v Autorun /d \"doskey /macrofile=\\\"c:\bat\macros.doskey\\\"\" /f")
+
 def printout_help():
     print("Github repository tool.\n Creates or Clones GitHub project and start editor.\n github <project name>")
     print("--help or -H for this very usefull help")
@@ -90,16 +111,26 @@ def printout_help():
 
 def main():
     global project_path
+    global editor
+    global GH_tokken
     # Prints out small help info
-    if "--help" in sys.argv or "-H" in sys.argv:
+    if "--help" in sys.argv[1] or "-H" in sys.argv[1]:
         printout_help()
         return
+    # Install scirpt file OS dependent (Still in development)
+    # elif "--install" in sys.argv[1] or "-I" in sys.argv[1]:
+    #     if len(sys.arv) == 3:
+    #         GH_tokken = sys.argv[2]
+    #     if len(sys.argv) == 4:
+    #         editor = sys.argv[3]
+    #     install()
+    #     return
     # Prints out all yours GitHub repositories
-    elif "-all" in sys.argv or "-A" in sys.argv:
+    elif "-all" in sys.argv[1] or "-A" in sys.argv[1]:
         print("Listing all your repositories...")
         github_getall()
         return
-    elif "-P" in sys.argv or "--push" in sys.argv:
+    elif "-P" in sys.argv[1] or "--push" in sys.argv[1]:
         github_commit()
         return
     elif len(sys.argv) > 1 and sys.argv[1].startswith("-"):
@@ -121,6 +152,8 @@ def main():
     # Runs Visual Studio Code in the new Project folder
     print("Starting editor...")
     subprocess.run([editor, project_path], shell = True)
+
+    subprocess.run("reg add \"HKCU\Software\Microsoft\Command Processor\" /v Autorun /d \"doskey /macrofile=\\\"d:\bat\macros.doskey\\\"\" /f")
 
 
 if __name__ == "__main__":
