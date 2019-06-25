@@ -153,8 +153,6 @@ def main():
     print("Starting editor...")
     subprocess.run([editor, project_path], shell = True)
 
-    subprocess.run("reg add \"HKCU\Software\Microsoft\Command Processor\" /v Autorun /d \"doskey /macrofile=\\\"d:\bat\macros.doskey\\\"\" /f")
-
 
 if __name__ == "__main__":
     main()
