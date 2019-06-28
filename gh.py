@@ -101,12 +101,12 @@ def install():
     # subprocess.run("reg add \"HKCU\Software\Microsoft\Command Processor\" /v Autorun /d \"doskey /macrofile=\\\"c:\bat\macros.doskey\\\"\" /f")
 
 def printout_help():
-    print("Github repository tool.\n Creates or Clones GitHub project and start editor.\n github <project name>")
-    print("--help or -H for this very usefull help")
-    print("--all or -A to list all your GitHub repositories")
-    print("--push or -P <Commit message> This will create a new commit with message and push it to GitHub.")
-    print("     Works with git repository of CURRENT WORKING FOLDER!")
-    print("     Example: github -P This is my commit message. No quotations needed.")
+    print("Github repository tool.\n Creates or Clones GitHub project and start editor.\n Usage: github <project name>")
+    print("     --help or -H for this very usefull help")
+    print("     --all or -A to list all your GitHub repositories")
+    print("     --push or -P <Commit message> This will create a new commit with message and push it to GitHub.")
+    print("          Works with git repository of CURRENT WORKING FOLDER!")
+    print("          Example: github -P This is my commit message. No quotations needed.")
 
 
 def main():
@@ -149,7 +149,7 @@ def main():
         # Deals with github repos
         github_repo(project_name)
     else:
-        print("No project in current folder!")
+        print('\x1b[6;30;41m' + "No project in current folder!" + '\x1b[0m')
         printout_help()
         return
     # Runs Visual Studio Code in the new Project folder
