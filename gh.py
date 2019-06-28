@@ -139,24 +139,22 @@ def main():
         return
     # Pull current folder project from Github
     elif os.path.isdir(os.getcwd() + "/.git"):
-        print("Pull initialized..")
+        print("Repository folder found. Pull initialized..")
         git.Repo(os.getcwd()).remotes.origin.pull()
-        return
     elif len(sys.argv) > 1:
         project_name = sys.argv[1]
+        project_path = projects_dir + project_name
+        # Creates Project folder
+        create_dir()
+        # Deals with github repos
+        github_repo(project_name)
     else:
         print("No project in current folder!")
         printout_help()
         return
-    project_path = projects_dir + project_name
-    # Creates Project folder
-    create_dir()
-    # Deals with github repos
-    github_repo(project_name)
     # Runs Visual Studio Code in the new Project folder
     print("Starting editor...")
     subprocess.run([editor, project_path], shell = True)
-
 
 if __name__ == "__main__":
     main()
