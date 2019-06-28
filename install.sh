@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILE="github"
+FILE="gh"
 FOLDER="/usr/local/bin"
 
 echo 'Installing required python packages...'

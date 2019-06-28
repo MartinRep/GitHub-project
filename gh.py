@@ -62,15 +62,15 @@ def github_commit():
         proc = subprocess.run(["git", "--version"], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         if not "git version" in str(proc.stdout):
             raise Exception("git not found")
-        message = "\""
+        message = ""
         for word in sys.argv[2:]:
             message = message + word + " "
-        message = message[:-1] + "\""
+        message = message[:-1]
         cur_dir = os.getcwd()
         if os.path.isdir(cur_dir + "/.git"):
             subprocess.run(["git", "add", cur_dir, "-A"])
             subprocess.run(["git", "commit", "-m", message])
-            answer = input("Push Commit with message: {} ?[y/n]".format(message))
+            answer = input("Push Commit with message: \"{}\" ?[y/n]".format(message))
             if "y" in answer:
                 subprocess.run(["git", "push"])
             else:
@@ -92,7 +92,7 @@ def install():
         line = f.readline()
         if "GH_tokken = \"Your Github Token\"" in line:
             line = "GH_tokken = \"{}\"".format(GH_tokken)
-        elif "editor = \"code\"" in line and editor in not "":
+        elif "editor = \"code\"" in line and editor is not "":
             line = "editor = \"{}\"".format(editor)
         script.write(line)
     script.close()
@@ -114,7 +114,7 @@ def main():
     global editor
     global GH_tokken
     # Prints out small help info
-    if "--help" in sys.argv[1] or "-H" in sys.argv[1]:
+    if "--help" in sys.argv or "-H" in sys.argv:
         printout_help()
         return
     # Install scirpt file OS dependent (Still in development)
@@ -126,24 +126,28 @@ def main():
     #     install()
     #     return
     # Prints out all yours GitHub repositories
-    elif "-all" in sys.argv[1] or "-A" in sys.argv[1]:
+    elif "-all" in sys.argv or "-A" in sys.argv:
         print("Listing all your repositories...")
         github_getall()
         return
-    elif "-P" in sys.argv[1] or "--push" in sys.argv[1]:
+    elif "-P" in sys.argv or "--push" in sys.argv:
         github_commit()
         return
     elif len(sys.argv) > 1 and sys.argv[1].startswith("-"):
         print("Unknown command: {}\n".format(sys.argv[1]))
         printout_help()
         return
-    # Create a new project with Generated name
+    # Pull current folder project from Github
     elif os.path.isdir(os.getcwd() + "/.git"):
         print("Pull initialized..")
         git.Repo(os.getcwd()).remotes.origin.pull()
         return
-    else:
+    elif len(sys.argv) > 1:
         project_name = sys.argv[1]
+    else:
+        print("No project in current folder!")
+        printout_help()
+        return
     project_path = projects_dir + project_name
     # Creates Project folder
     create_dir()
