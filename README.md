@@ -28,7 +28,7 @@ It's a terminal abstraction for GitHub.
   `./install.sh <GiTHub Access Token>`
   - Or if you don't provide Token in argument it will prompt you for it.
   - You will be asked for a sudo password to access the `/usr/local/bin` folder.
-  - Now simply use `github <command>` from any folder instead `python gh.py <command>`.
+  - Now simply use `gh <command>` from any folder instead `python gh.py <command>`.
   
   ### Troubleshoot 
   - Change file attributes in case it's not marked as executable `chmod +x ./install.sh`
