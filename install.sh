@@ -4,7 +4,7 @@ FILE="gh"
 FOLDER="/usr/local/bin"
 
 echo 'Installing required python packages...'
-pip install -r requirements.txt
+pip install --user -r requirements.txt
 echo 'Creating executable script...'
 
 if [[ -z "$1" ]]; then

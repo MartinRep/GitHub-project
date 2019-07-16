@@ -154,7 +154,7 @@ def main():
         return
     # Runs Visual Studio Code in the new Project folder
     print("Starting editor...")
-    subprocess.run([editor, project_path], shell = True)
+    subprocess.run([editor, project_path])
 
 if __name__ == "__main__":
     main()
