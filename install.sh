@@ -20,7 +20,7 @@ else
 fi
 
 touch "$FILE"
-echo "#!/usr/bin/env python" > "$FILE"
+echo "#!/usr/bin/env python3" > "$FILE"
 input="gh.py"
 while IFS= read -r line
 do
