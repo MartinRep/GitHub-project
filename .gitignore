@@ -125,3 +125,7 @@ dmypy.json
 
 # install script
 install/
+
+# VS code
+.vscode/
+.vscode/setting.json
