@@ -21,6 +21,11 @@ It's a terminal abstraction for GitHub.
  - Two extra packages: `pip install gitpython` , `pip install PyGithub`
  - Or simply use `pip install -r requirements.txt`
  - Copy the token and paste it into the `gh.py`. Variables for customization purposes are on the top of the file.  
+ - Append `~/.ssh/config` file with:  
+  `host github.com
+   HostName github.com
+   IdentityFile ~/.ssh/id_rsa_github
+   User YOUR_USERNAME`
  
  ## Linux based systems (Optional, but Recommended)
  
