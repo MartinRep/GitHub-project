@@ -27,20 +27,23 @@ def github_repo(project_name):
     os.chdir(projects_dir)
     myGH = Github(GH_tokken) 
     user = myGH.get_user()
+    git_ssh_identity_file = os.path.expanduser('~/.ssh/id_rsa')
+    git_ssh_cmd = 'ssh -i %s' % git_ssh_identity_file
     print("Checking if project repository alredy exists...")
     for repo in user.get_repos():
         # Local project files found
         if project_name == repo.name:
-            print("Repository {} alredy exist on Github. Just cloning the repo...".format(project_name))
-            if os.path.isdir(project_path + "/.git"):
-                print("Repository folder already exist, Repository Pull initialized..")
-                git.Repo(project_name).remotes.origin.pull()
-            else:
-                git.Repo.clone_from(repo.html_url, project_path)
-            # Modify repository remote URL from https to ssh. This allows to use git push with RSA key (no need for password)
-            origin = git.Repo(project_name).remotes.origin
-            origin.config_writer.set("pushurl", "git@github.com:{}".format(repo.git_url[16:]))
-            return
+            with git.Git().custom_environment(GIT_SSH_COMMAND=git_ssh_cmd):
+                print("Repository {} alredy exist on Github. Just cloning the repo...".format(project_name))
+                if os.path.isdir(project_path + "/.git"):
+                    print("Repository folder already exist, Repository Pull initialized..")
+                    git.Repo(project_name).remotes.origin.pull()
+                else:
+                    git.Repo.clone_from(repo.html_url, project_path)
+                # Modify repository remote URL from https to ssh. This allows to use git push with RSA key (no need for password)
+                origin = git.Repo(project_name).remotes.origin
+                origin.config_writer.set("pushurl", "git@github.com:{}".format(repo.git_url[16:]))
+                return
     print("Repository not found, creating a new one.")
     # Creates Repository on Github
     repo = user.create_repo(project_name)
@@ -85,10 +88,10 @@ def install():
         script_file = "gh"
     elif "Windows" in platform.system():
         script_file = "gh.py"
-    script = open(script_file, w)
+    script = open(script_file, "w")
     if "Linux" in platform.system():
-        script.write("#!/usr/bin/env python\n\n")
-    with open(gh_file) as f:
+        script.write("#!/usr/bin/env python3\n\n")
+    with open(script_file) as f:
         line = f.readline()
         if "GH_tokken = \"Your Github Token\"" in line:
             line = "GH_tokken = \"{}\"".format(GH_tokken)
