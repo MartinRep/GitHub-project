@@ -4,7 +4,7 @@ FILE="gh"
 FOLDER="~/.local/bin"
 
 echo 'Installing required python packages...'
-pip install --user -r requirements.txt
+pip3 install --user -r requirements.txt
 echo 'Creating executable script...'
 
 if [[ -z "$1" ]]; then
@@ -33,6 +33,6 @@ done < "$input"
 
 chmod +x $FILE
 echo 'Copying script to local bin folder...'
-sudo mv $FILE $FOLDER
-sudo chmod +x "$FOLDER/$FILE"
+mv $FILE $FOLDER
+chmod +x "$FOLDER/$FILE"
 echo "The script file $FILE created in $FOLDER"
